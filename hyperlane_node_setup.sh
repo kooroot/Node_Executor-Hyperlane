@@ -16,7 +16,7 @@ fi
 if [ -z "$STY" ]; then
   echo "현재 screen 세션 내에서 실행 중이 아닙니다."
   echo "hyperlane_node라는 이름의 screen 세션을 생성하고 해당 세션으로 자동 접속합니다..."
-  exec screen -S hyperlane_node -D -R bash -c "$0; exec bash"
+  exec screen -S hyperlane_node -D -R "$SHELL" -c "$0; exec $SHELL"
 fi
 
 # 3. 사용자 입력: Validator 이름과 Base 체인의 RPC URL
