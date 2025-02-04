@@ -35,6 +35,7 @@ chmod 755 hyperlane_node_setup.sh
 ## 사전 요구 사항
 - Linux 또는 macOS 운영체제
 - Base 체인의 RPC 및 수수료로 사용할 소량의 ETH
+- MacOS의 경우 Docker Desktop이 설치되어있어야합니다.
 
 ## 문제 해결 및 참고
 - Foundry 명령어 미인식 문제: Foundry 설치 후 사용자의 쉘 설정 파일($HOME/.bashrc 또는 $HOME/.zshrc)을 소스하고, PATH에 Foundry 바이너리 디렉토리를 추가하여 foundryup 명령어가 올바르게 인식되도록 처리합니다.
