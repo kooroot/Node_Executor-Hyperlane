@@ -32,6 +32,17 @@ chmod 755 hyperlane_node_setup.sh
 ```
 실행 중에는 Validator 이름과 Base 체인의 RPC URL을 입력하라는 메시지가 나타납니다. 또한, 스크립트가 실행되는 동안 생성된 지갑의 Private Key가 자동으로 추출되며, 이 정보는 노드 실행에 필수적이므로 안전하게 보관하시기 바랍니다.
 
+수동으로 원하는 지갑을 추가하려면 다음 스크립트를 실행합니다.
+```
+wget https://raw.githubusercontent.com/kooroot/Node_Executor-Hyperlane/refs/heads/main/hyperlane_node_custom_wallet.sh
+```
+```
+chmod +x hyperlane_node_custom_wallet.sh
+```
+```
+./hyperlane_node_custom_wallet.sh
+```
+
 ## 사전 요구 사항
 - Linux 또는 macOS 운영체제
 - Base 체인의 RPC 및 수수료로 사용할 소량의 ETH
