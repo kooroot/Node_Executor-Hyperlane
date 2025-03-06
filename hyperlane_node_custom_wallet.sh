@@ -81,21 +81,21 @@ if [ "$OS" = "Darwin" ]; then
   mkdir -p "$HOME/hyperlane_db_base" && chmod -R 777 "$HOME/hyperlane_db_base"
 
   docker run -d \
-  -it \
-  --name hyperlane \
-  --mount type=bind,source="$HOME/hyperlane_db_base",target=/hyperlane_db_base \
-  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
-  ./validator \
-  --db /hyperlane_db_base \
-  --originChainName base \
-  --reorgPeriod 1 \
-  --validator.id "$VALIDATOR_NAME" \
-  --checkpointSyncer.type localStorage \
-  --checkpointSyncer.folder base \
-  --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
-  --validator.key "$PRIVATE_KEY" \
-  --chains.base.signer.key "$PRIVATE_KEY" \
-  --chains.base.customRpcUrls "$RPC_CHAIN"
+    -it \
+    --name hyperlane \
+    --mount type=bind,source="$HOME/hyperlane_db_base",target=/hyperlane_db_base \
+    gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
+    ./validator \
+    --db /hyperlane_db_base \
+    --originChainName base \
+    --reorgPeriod 1 \
+    --validator.id "$VALIDATOR_NAME" \
+    --checkpointSyncer.type localStorage \
+    --checkpointSyncer.folder base \
+    --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
+    --validator.key "$PRIVATE_KEY" \
+    --chains.base.signer.key "$PRIVATE_KEY" \
+    --chains.base.customRpcUrls "$RPC_CHAIN"
 
     
 
