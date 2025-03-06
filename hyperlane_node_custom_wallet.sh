@@ -68,7 +68,7 @@ if [ "$OS" = "Darwin" ]; then
   export PATH="$HOME/.foundry/bin:$PATH"
   foundryup
 
-  PRIVATE_KEY="0x"+$INPUT_PRIVATE_KEY
+  PRIVATE_KEY="0x"$INPUT_PRIVATE_KEY
   echo "입력된 Private Key: $PRIVATE_KEY"
 
   # Hyperlane CLI 설치
