@@ -68,7 +68,6 @@ if [ "$OS" = "Darwin" ]; then
   export PATH="$HOME/.foundry/bin:$PATH"
   foundryup
 
-  PRIVATE_KEY=$
   echo "입력된 Private Key: $PRIVATE_KEY"
   echo ""
 
