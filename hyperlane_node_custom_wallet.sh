@@ -22,7 +22,7 @@ fi
 # 3. 사용자 입력: Validator 이름과 Base 체인의 RPC URL
 read -p "Validator 이름을 입력하세요: " VALIDATOR_NAME
 read -p "Base 체인의 RPC URL을 입력하세요: " RPC_CHAIN
-read -p "지갑 주소를 입력하세요(0x...형식): " PRIVATE_KEY
+read -p "지갑의 개인키를 입력하세요: " INPUT_PRIVATE_KEY
 
 echo "----------------------------------------------"
 echo "Hyperlane 노드 자동 구축 스크립트 시작"
@@ -68,8 +68,8 @@ if [ "$OS" = "Darwin" ]; then
   export PATH="$HOME/.foundry/bin:$PATH"
   foundryup
 
+  PRIVATE_KEY="0x"+$INPUT_PRIVATE_KEY
   echo "입력된 Private Key: $PRIVATE_KEY"
-  echo ""
 
   # Hyperlane CLI 설치
   npm install -g @hyperlane-xyz/cli
@@ -80,23 +80,24 @@ if [ "$OS" = "Darwin" ]; then
   # 데이터베이스 디렉토리 생성 (macOS에서는 홈 디렉토리 사용)
   mkdir -p "$HOME/hyperlane_db_base" && chmod -R 777 "$HOME/hyperlane_db_base"
 
-  # Hyperlane 에이전트 Docker 컨테이너 실행
   docker run -d \
-    -it \
-    --name hyperlane \
-    --mount type=bind,source="$HOME/hyperlane_db_base",target=/hyperlane_db_base \
-    gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
-    ./validator \
-    --db /hyperlane_db_base \
-    --originChainName base \
-    --reorgPeriod 1 \
-    --validator.id "$VALIDATOR_NAME" \
-    --checkpointSyncer.type localStorage \
-    --checkpointSyncer.folder base \
-    --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
-    --validator.key "$PRIVATE_KEY" \
-    --chains.base.signer.key "$PRIVATE_KEY" \
-    --chains.base.customRpcUrls "$RPC_CHAIN"
+  -it \
+  --name hyperlane \
+  --mount type=bind,source="$HOME/hyperlane_db_base",target=/hyperlane_db_base \
+  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
+  ./validator \
+  --db /hyperlane_db_base \
+  --originChainName base \
+  --reorgPeriod 1 \
+  --validator.id "$VALIDATOR_NAME" \
+  --checkpointSyncer.type localStorage \
+  --checkpointSyncer.folder base \
+  --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
+  --validator.key "$PRIVATE_KEY" \
+  --chains.base.signer.key "$PRIVATE_KEY" \
+  --chains.base.customRpcUrls "$RPC_CHAIN"
+
+    
 
 elif [ "$OS" = "Linux" ]; then
   echo "Linux 환경이 감지되었습니다. Linux 전용 명령어를 실행합니다..."
