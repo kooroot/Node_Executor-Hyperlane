@@ -122,6 +122,9 @@ elif [ "$OS" = "Linux" ]; then
   fi
   export PATH="$HOME/.foundry/bin:$PATH"
   foundryup
+  
+  PRIVATE_KEY="0x$INPUT_PRIVATE_KEY"
+  echo "입력된 Private Key: $PRIVATE_KEY"
 
   # Hyperlane CLI 설치
   npm install -g @hyperlane-xyz/cli
